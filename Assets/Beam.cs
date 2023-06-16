@@ -27,10 +27,11 @@ public class Beam : MonoBehaviour
 
             h.rb.constraints = RigidbodyConstraints2D.FreezeAll;
 
-            StartCoroutine(SuckPlayer());
+          
            
             h.target = humanReceivePoint.transform;
             h.rb.gravityScale = 0;
+            h.canMove= false;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -41,13 +42,9 @@ public class Beam : MonoBehaviour
 
             h.target = null;
             h.rb.gravityScale = 1;
-
+            h.rb.constraints = RigidbodyConstraints2D.None;
         }
     }
 
-    private IEnumerator SuckPlayer()
-    {
-        yield return new WaitForSeconds(1);
-        h.rb.constraints = RigidbodyConstraints2D.None;
-    }
+
 }
