@@ -31,6 +31,12 @@ public class HumanReceivePoint : MonoBehaviour
             // when player dies pass this through to submitscore
             //     StartCoroutine(LeaderBoard.instance.SubmitScoreRoutine(inGameScore));
             //  StartCoroutine(LeaderBoard.instance.FetchTopHighScoresRoutine());
+
+            if(inGameScore >= 10)
+            {
+               StartCoroutine( EnemySpawner.instance.SpawnPoliceMen());
+                print("call in the cavalry");
+            }
         }
     }
 }
