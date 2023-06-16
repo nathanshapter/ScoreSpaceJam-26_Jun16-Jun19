@@ -6,10 +6,14 @@ public class PoliceGun : MonoBehaviour
 {
     PlayerController target;
     [SerializeField] float rotationOffset;
+    [SerializeField] GameObject bulletPrefab;
 
     private Camera mainCamera;
     private RectTransform rectTransform;
+    private bool isFiring = false;
+    [SerializeField] float bulletTimer;
 
+    [SerializeField] Transform bulletPoint;
     private void Start()
     {
         target = FindObjectOfType<PlayerController>();
@@ -24,12 +28,12 @@ public class PoliceGun : MonoBehaviour
     }
     private void Update()
     {
-      
+   
 
         LookAtTarget();
-        if (IsInGameView())
+        if (IsInGameView() && !isFiring)
         {
-            print("balls");
+            StartCoroutine(SpawnBullet());
         }
     }
 
@@ -42,5 +46,12 @@ public class PoliceGun : MonoBehaviour
     }
 
 
-
+    private IEnumerator SpawnBullet()
+    {
+        isFiring= true;
+      GameObject bullet =   Instantiate(bulletPrefab, null, false);
+        bullet.transform.position = bulletPoint.transform.position; 
+        yield return new WaitForSeconds(bulletTimer);
+        isFiring = false;
+    }
 }
