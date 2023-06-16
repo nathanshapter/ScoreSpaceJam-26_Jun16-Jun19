@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] int score = 5;
+    
 
     Vector2 rawInput;
     Vector3 velocity;
@@ -63,11 +63,7 @@ public class PlayerController : MonoBehaviour
         transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
 
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            score += 5;
-            StartCoroutine(LeaderBoard.instance.SubmitScoreRoutine(score));
-        }
+       
     }
 
     public void OnMove(InputValue value)
