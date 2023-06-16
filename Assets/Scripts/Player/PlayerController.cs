@@ -24,14 +24,20 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] SpriteRenderer beam;
    public Transform humanReceivePoint;
+
+    bool beamState = false;
     private void Start()
     {
         beam.gameObject.SetActive(false);
     }
     void Update()
     {
+
+
         // Smoothly move the object within the clamped position range
         Vector3 delta = rawInput;
+
+      
         targetPosition = transform.position + (delta * moveSpeed * Time.deltaTime);
         targetPosition = new Vector3(
             Mathf.Clamp(targetPosition.x, clampMin.x, clampMax.x),
@@ -71,6 +77,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnFire(InputValue value)
     {
-        beam.gameObject.SetActive(true);
+        beamState = !beamState;
+        beam.gameObject.SetActive(beamState);
     }
 }
