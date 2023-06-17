@@ -7,6 +7,6 @@ public class GameCanvas : MonoBehaviour
 {
    public void Reload()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 }
