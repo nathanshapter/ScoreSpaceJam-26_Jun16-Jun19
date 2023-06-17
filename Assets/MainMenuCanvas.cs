@@ -10,10 +10,7 @@ public class MainMenuCanvas : MonoBehaviour
 
     private void Start()
     {
-        DisableAllUI();
-
-        playButton.SetActive(true);
-        highscoresButton.SetActive(true);
+        Back();
     }
 
 
@@ -34,5 +31,13 @@ public class MainMenuCanvas : MonoBehaviour
     {
         DisableAllUI();
         highScoresMenu.SetActive(true);
+    }
+
+    public void Back()
+    {
+        DisableAllUI();
+
+        playButton.SetActive(true);
+        highscoresButton.SetActive(true);
     }
 }
