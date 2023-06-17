@@ -24,19 +24,26 @@ public class HumanReceivePoint : MonoBehaviour
             Destroy(collision.gameObject);
 
             print("human eaten");
-                       
-                inGameScore += 5;
+
+            inGameScore += 5;
             scoreText.text = $"Score: {inGameScore}";
 
             // when player dies pass this through to submitscore
-            //     StartCoroutine(LeaderBoard.instance.SubmitScoreRoutine(inGameScore));
+            
             //  StartCoroutine(LeaderBoard.instance.FetchTopHighScoresRoutine());
 
-            if(inGameScore >= 10)
+            if (inGameScore >= 10)
             {
-               StartCoroutine( EnemySpawner.instance.SpawnPoliceMen());
+                StartCoroutine(EnemySpawner.instance.SpawnPoliceMen());
                 print("call in the cavalry");
             }
         }
+    }
+
+ 
+
+    public void SubmitScore()
+    {
+        StartCoroutine(LeaderBoard.instance.SubmitScoreRoutine(inGameScore));
     }
 }

@@ -21,6 +21,10 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
-        print(health);
+       if(health < 0)
+        {
+            GetComponentInChildren<HumanReceivePoint>().SubmitScore(); // and from here we have to fetch it for the top score
+
+        }
     }
 }
