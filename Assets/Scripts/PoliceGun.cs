@@ -14,6 +14,8 @@ public class PoliceGun : MonoBehaviour
     [SerializeField] float bulletTimer;
 
     [SerializeField] Transform bulletPoint;
+
+  public  bool canShoot = true;
     private void Start()
     {
         target = FindObjectOfType<PlayerController>();
@@ -28,8 +30,8 @@ public class PoliceGun : MonoBehaviour
     }
     private void Update()
     {
-   
 
+       
         LookAtTarget();
         if (IsInGameView() && !isFiring)
         {
@@ -49,8 +51,12 @@ public class PoliceGun : MonoBehaviour
     private IEnumerator SpawnBullet()
     {
         isFiring= true;
-      GameObject bullet =   Instantiate(bulletPrefab, null, false);
-        bullet.transform.position = bulletPoint.transform.position; 
+        if (canShoot)
+        {
+            GameObject bullet = Instantiate(bulletPrefab, null, false);
+            bullet.transform.position = bulletPoint.transform.position;
+        }
+      
         yield return new WaitForSeconds(bulletTimer);
         isFiring = false;
     }

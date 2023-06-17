@@ -24,6 +24,10 @@ public class Beam : MonoBehaviour
         if (collision.gameObject.CompareTag("Human"))
         {
             h = collision.GetComponent<Human>();
+           if(h.GetComponent<Human>().isPoliceman)
+            {
+                h.gunref.canShoot= false;
+            }
 
             h.rb.constraints = RigidbodyConstraints2D.FreezeAll;
 
@@ -39,7 +43,10 @@ public class Beam : MonoBehaviour
         if (collision.gameObject.CompareTag("Human"))
         {
             Human h = collision.GetComponent<Human>();
-
+            if (h.GetComponent<Human>().isPoliceman)
+            {
+                h.gunref.canShoot = true;
+            }
             h.target = null;
             h.rb.gravityScale = 1;
             h.rb.constraints = RigidbodyConstraints2D.None;

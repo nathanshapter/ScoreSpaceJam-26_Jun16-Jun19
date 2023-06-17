@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Human : MonoBehaviour
 {
+
+   public PoliceGun gunref;
    public Transform target;
     public float suckedMoveSpeed = 5f;
     public float moveSpeed = 5f;
@@ -15,11 +17,19 @@ public class Human : MonoBehaviour
 
     public Transform leftPosition;   
     public Transform rightPosition;
+
+   public bool isPoliceman;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         leftPosition = FindObjectOfType<HumanLimit>().leftLimit;
         rightPosition = FindObjectOfType<HumanLimit>().rightLimit;
+
+        if(GetComponentInChildren<PoliceGun>() != null)
+        {
+            isPoliceman = true;
+            gunref= GetComponentInChildren<PoliceGun>();
+        }
     }
 
 

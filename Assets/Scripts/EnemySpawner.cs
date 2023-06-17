@@ -35,7 +35,8 @@ public class EnemySpawner : MonoBehaviour
 
     public IEnumerator SpawnPoliceMen()
     {
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(timeBetweenPoliceSpawn);
+        Instantiate(policeMan, spawnPoints[ChooseSpawnPoint()].position, Quaternion.identity);
         StartCoroutine(SpawnPoliceMen());
     }
 
@@ -51,7 +52,16 @@ public class EnemySpawner : MonoBehaviour
    
         StartCoroutine(SpawnHuman());
     }
-
+  public  float CalculateNewPoliceSpawnTime()
+    {
+        if(timeBetweenPoliceSpawn< timeBetweenHumanSpawn)
+        {
+            return timeBetweenPoliceSpawn;
+        }
+        float newSpawnTime = timeBetweenPoliceSpawn / 2;
+        timeBetweenPoliceSpawn= newSpawnTime;
+        return timeBetweenPoliceSpawn;
+    }
    int ChooseSpawnPoint()
     {
       int poop =   Random.Range(0,spawnPoints.Length);
