@@ -9,7 +9,10 @@ public class HumanReceivePoint : MonoBehaviour
     BoxCollider2D boxCollider;
     [SerializeField] int inGameScore = 5;
     [SerializeField] TextMeshProUGUI scoreText;
-   
+
+
+   [SerializeField] int scoreForEatingHuman = 5;
+    public int humansEaten;
     private void Start()
     {
         boxCollider= GetComponent<BoxCollider2D>();
@@ -25,18 +28,14 @@ public class HumanReceivePoint : MonoBehaviour
 
             print("human eaten");
 
-            inGameScore += 5;
+            inGameScore += scoreForEatingHuman;
             scoreText.text = $"Score: {inGameScore}";
 
             // when player dies pass this through to submitscore
-            
+            EnemySpawner.instance.amountOfHumans--;
             //  StartCoroutine(LeaderBoard.instance.FetchTopHighScoresRoutine());
 
-            if (inGameScore >= 10)
-            {
-                StartCoroutine(EnemySpawner.instance.SpawnPoliceMen());
-                print("call in the cavalry");
-            }
+          
         }
     }
 
@@ -45,5 +44,12 @@ public class HumanReceivePoint : MonoBehaviour
     public void SubmitScore()
     {
         StartCoroutine(LeaderBoard.instance.SubmitScoreRoutine(inGameScore));
+    }
+
+    public int AmountOfHumansEaten()
+    {
+        humansEaten = scoreForEatingHuman / 5;
+        return humansEaten;
+      
     }
 }

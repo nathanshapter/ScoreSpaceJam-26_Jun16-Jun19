@@ -26,6 +26,8 @@ public class PlayerController : MonoBehaviour
    public Transform humanReceivePoint;
 
     bool beamState = false;
+
+   
     private void Start()
     {
         beam.gameObject.SetActive(false);

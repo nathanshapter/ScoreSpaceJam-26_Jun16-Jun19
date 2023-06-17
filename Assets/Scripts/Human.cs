@@ -18,6 +18,8 @@ public class Human : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        leftPosition = FindObjectOfType<HumanLimit>().leftLimit;
+        rightPosition = FindObjectOfType<HumanLimit>().rightLimit;
     }
 
 
