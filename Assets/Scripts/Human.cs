@@ -18,7 +18,7 @@ public class Human : MonoBehaviour
     public Transform leftPosition;   
     public Transform rightPosition;
 
-    Animator anim;
+   [SerializeField] Animator anim;
 
    public bool isPoliceman;
     private void Start()
@@ -26,7 +26,7 @@ public class Human : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         leftPosition = FindObjectOfType<HumanLimit>().leftLimit;
         rightPosition = FindObjectOfType<HumanLimit>().rightLimit;
-        anim = GetComponent<Animator>();
+        anim = GetComponentInChildren<Animator>();
         if(GetComponentInChildren<PoliceGun>() != null)
         {
             isPoliceman = true;
@@ -47,8 +47,14 @@ public class Human : MonoBehaviour
     private void Update()
     {
         ResetRotation();
-        if (canMove)
+        if (!canMove)
         {
+            anim.SetBool("sucked", true);
+        }
+        else if(canMove)
+        {
+            anim.SetBool("sucked", false);
+
             if (isMovingRight)
             {
                 rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
@@ -68,6 +74,8 @@ public class Human : MonoBehaviour
                 }
             }
         }
+        
+    
       
       
 
@@ -85,17 +93,19 @@ public class Human : MonoBehaviour
     }
 
 
+   
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
+          
             canMove = true;
-           
+        
         }
-
-
-       
     }
+
+ 
     private void ResetRotation()
     {
         transform.rotation = Quaternion.identity;

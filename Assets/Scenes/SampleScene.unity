@@ -403,7 +403,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -3e-45, y: 1e-45, z: 0, w: 1}
   m_LocalPosition: {x: 3.04, y: 2.79, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
@@ -446,6 +446,11 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &524395158 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8367992279687870027, guid: bfd4a3b23088a6f4b96e84fa5b9c256a, type: 3}
+  m_PrefabInstance: {fileID: 8367992280609583873}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &599850159
 GameObject:
   m_ObjectHideFlags: 0
@@ -1731,6 +1736,10 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1771383021851001391, guid: 65572249f5e61244e8f1bc3567c1173a, type: 3}
+      propertyPath: ground
+      value: 
+      objectReference: {fileID: 524395158}
     - target: {fileID: 1771383021851001391, guid: 65572249f5e61244e8f1bc3567c1173a, type: 3}
       propertyPath: scoreText
       value: 

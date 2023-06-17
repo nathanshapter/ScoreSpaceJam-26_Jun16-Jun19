@@ -35,7 +35,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0, y: 0.85}
+  m_AnchoredPosition: {x: -0, y: 0.552}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &4612095570174074363
@@ -106,6 +106,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 3454676455065842336, guid: 9d6ae4237fc819a42b9797c7c62a40e2, type: 3}
   bulletTimer: 1
   bulletPoint: {fileID: 4612095570460472003}
+  canShoot: 1
 --- !u!1 &4612095570460472000
 GameObject:
   m_ObjectHideFlags: 0
@@ -139,7 +140,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 2.1377}
+  m_AnchoredPosition: {x: 0, y: 1.146}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &7652022812019992152
@@ -169,9 +170,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7652022812019992152}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.431, y: -3.291566, z: -2.2003288}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: -3.431, y: -3.291566, z: 0}
+  m_LocalScale: {x: 4.5, y: 4.5, z: 4.5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7652022812942602119}
   m_Father: {fileID: 0}
@@ -201,7 +202,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.21950667, y: 0.23259558}
+  m_Size: {x: 0.09604414, y: 0.17848402}
   m_EdgeRadius: 0
 --- !u!50 &7652022812019992159
 Rigidbody2D:
@@ -236,13 +237,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b36a7097554bb3144bee73f1d7aeeb6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gunref: {fileID: 0}
   target: {fileID: 0}
   suckedMoveSpeed: 1.8
   moveSpeed: 0.5
   rb: {fileID: 0}
   canMove: 1
+  isMovingRight: 1
   leftPosition: {fileID: 0}
   rightPosition: {fileID: 0}
+  anim: {fileID: 0}
+  isPoliceman: 0
 --- !u!1 &7652022812942602118
 GameObject:
   m_ObjectHideFlags: 0
@@ -253,6 +258,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7652022812942602119}
   - component: {fileID: 7652022812942602116}
+  - component: {fileID: 3036538681290495649}
   m_Layer: 6
   m_Name: Human Sprite
   m_TagString: Human
@@ -268,7 +274,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7652022812942602118}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.99259007}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.23, y: 0.23, z: 0.23}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -318,7 +324,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 683772991, guid: 8d2d71699b0aee249b367bcf8ee2b57d, type: 3}
   m_Color: {r: 0.014239851, g: 0.21775167, b: 0.9056604, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -329,3 +335,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &3036538681290495649
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7652022812942602118}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 278ad5512831be54db6b1cbe7a0f65d6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0

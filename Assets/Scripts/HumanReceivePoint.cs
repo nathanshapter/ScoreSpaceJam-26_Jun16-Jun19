@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 
@@ -16,11 +17,14 @@ public class HumanReceivePoint : MonoBehaviour
 
     [SerializeField] int beforePolice = 10;
     Beam beam;
+
+   [SerializeField] GameObject ground;
     private void Start()
     {
         boxCollider= GetComponent<BoxCollider2D>();
         scoreText.text = $"Score: {inGameScore}";
         beam = FindObjectOfType<Beam>();
+        
     }
 
 
@@ -32,7 +36,18 @@ public class HumanReceivePoint : MonoBehaviour
             beam.beamBattery++;
             
             humansEaten++;
-            inGameScore += scoreForEatingHuman;
+           
+            if(collision.GetComponent<Human>().isPoliceman)
+            {
+                scoreForEatingHuman = 25;
+                
+            }
+            else
+            {
+                scoreForEatingHuman = 5;
+            }
+
+            CalculateScore();
             scoreText.text = $"Score: {inGameScore}";
 
             // when player dies pass this through to submitscore
@@ -49,7 +64,16 @@ public class HumanReceivePoint : MonoBehaviour
         }
     }
 
- 
+    private int CalculateScore()
+    {
+        inGameScore += scoreForEatingHuman;
+        var distance =  Vector2.Distance(this.transform.position,ground.transform.position);
+       int yDistance = (-Mathf.RoundToInt(Mathf.Abs(transform.position.y - ground.transform.position.y)) *2);
+        inGameScore -= yDistance;
+       
+        return inGameScore;
+
+    }
 
     public void SubmitScore()
     {
