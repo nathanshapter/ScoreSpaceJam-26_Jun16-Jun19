@@ -15,10 +15,12 @@ public class HumanReceivePoint : MonoBehaviour
     public int humansEaten;
 
     [SerializeField] int beforePolice = 10;
+    Beam beam;
     private void Start()
     {
         boxCollider= GetComponent<BoxCollider2D>();
         scoreText.text = $"Score: {inGameScore}";
+        beam = FindObjectOfType<Beam>();
     }
 
 
@@ -27,7 +29,7 @@ public class HumanReceivePoint : MonoBehaviour
         if (collision.gameObject.CompareTag("Human"))
         {
             Destroy(collision.gameObject);
-
+            beam.beamBattery++;
             
             humansEaten++;
             inGameScore += scoreForEatingHuman;

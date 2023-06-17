@@ -46,6 +46,7 @@ public class Human : MonoBehaviour
 
     private void Update()
     {
+        ResetRotation();
         if (canMove)
         {
             if (isMovingRight)
@@ -89,18 +90,14 @@ public class Human : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             canMove = true;
-          
+           
         }
 
 
        
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void ResetRotation()
     {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            anim.SetTrigger("sucked");
-
-        }
+        transform.rotation = Quaternion.identity;
     }
 }

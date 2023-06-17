@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Beam : MonoBehaviour
@@ -7,15 +8,25 @@ public class Beam : MonoBehaviour
     BoxCollider2D boxCollider;
     [SerializeField] GameObject humanReceivePoint;
 
+    [SerializeField] TextMeshProUGUI beamBatteryText;
 
-    [SerializeField] float battery;
+
+
 
     Human h;
+
+    public float beamBattery = 1000;
     private void Start()
     {
         boxCollider= GetComponent<BoxCollider2D>();
 
      
+    }
+
+    private void Update()
+    {
+        beamBattery -= Time.deltaTime;
+        beamBatteryText.text = $"Battery: {beamBattery}";
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

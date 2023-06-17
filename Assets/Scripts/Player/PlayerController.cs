@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -20,17 +21,18 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private Vector2 clampMin = new Vector2(-5f, -5f); // Define the minimum position values
     [SerializeField] private Vector2 clampMax = new Vector2(5f, 5f); // Define the maximum position values
-
+   
 
     [SerializeField] SpriteRenderer beam;
    public Transform humanReceivePoint;
 
     bool beamState = false;
-
+    [SerializeField] TextMeshProUGUI beamBattery;
    
     private void Start()
     {
         beam.gameObject.SetActive(false);
+        beamBattery.text = "Battery";
     }
     void Update()
     {
