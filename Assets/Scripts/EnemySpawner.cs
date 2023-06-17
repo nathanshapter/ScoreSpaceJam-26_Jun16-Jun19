@@ -31,6 +31,8 @@ public class EnemySpawner : MonoBehaviour
     private void Start()
     {
         StartCoroutine(SpawnHuman());
+
+       
     }
 
     public IEnumerator SpawnPoliceMen()
