@@ -29,7 +29,7 @@ public class HumanReceivePoint : MonoBehaviour
         if (collision.gameObject.CompareTag("Human"))
         {
             Destroy(collision.gameObject);
-            beam.beamBattery++;
+            beam.beamBattery += 0.8f;
             
             humansEaten++;
             inGameScore += scoreForEatingHuman;

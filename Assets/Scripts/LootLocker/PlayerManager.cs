@@ -11,10 +11,19 @@ public class PlayerManager : MonoBehaviour
 
     public LeaderBoard leaderBoard;
     public TMP_InputField playerNameInputField;
-
-
+    [SerializeField] TextMeshProUGUI textTooLong;
+    int nameCap = 10;
     public void SetPlayerName()
     {
+        if(playerNameInputField.text.Length > nameCap)
+        {
+            print("name too long");
+            textTooLong.text = $"Names are capped at {nameCap} digits";
+            return;
+           
+        }
+        else { textTooLong.text = string.Empty; }
+
         LootLockerSDKManager.SetPlayerName(playerNameInputField.text, (response) =>
         {
             if (response.success)
