@@ -12,11 +12,13 @@ public class Human : MonoBehaviour
 
   public  Rigidbody2D rb;
  public   bool canMove = true;
-    bool isMovingRight = true;
+  [SerializeField]  bool isMovingRight = true;
 
 
     public Transform leftPosition;   
     public Transform rightPosition;
+
+    Animator anim;
 
    public bool isPoliceman;
     private void Start()
@@ -24,12 +26,20 @@ public class Human : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         leftPosition = FindObjectOfType<HumanLimit>().leftLimit;
         rightPosition = FindObjectOfType<HumanLimit>().rightLimit;
-
+        anim = GetComponent<Animator>();
         if(GetComponentInChildren<PoliceGun>() != null)
         {
             isPoliceman = true;
             gunref= GetComponentInChildren<PoliceGun>();
         }
+
+        if (Random.Range(0, 2) > 0)
+        {
+            isMovingRight = false;
+            FlipCharacter();
+        }
+      
+        
     }
 
 
@@ -44,36 +54,53 @@ public class Human : MonoBehaviour
                 if (transform.position.x >= rightPosition.position.x)
                 {
                     isMovingRight = false;
+                    FlipCharacter();
                 }
             }
-            if (!isMovingRight)
+            else
             {
                 rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
                 if (transform.position.x <= leftPosition.position.x)
                 {
                     isMovingRight = true;
+                    FlipCharacter();
                 }
             }
         }
-
-
+      
+      
 
         if (target == null) return;
 
-     Vector3 newPosition =   Vector3.MoveTowards(this.transform.position, target.transform.position,suckedMoveSpeed * Time.deltaTime );
+        Vector3 newPosition = Vector3.MoveTowards(transform.position, target.transform.position, suckedMoveSpeed * Time.deltaTime);
         transform.position = newPosition;
-  
     }
-   
+
+    private void FlipCharacter()
+    {
+        Vector3 localScale = transform.localScale;
+        localScale.x *= -1f;
+        transform.localScale = localScale;
+    }
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
             canMove = true;
+          
         }
 
 
        
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            anim.SetTrigger("sucked");
+
+        }
     }
 }

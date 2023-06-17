@@ -19,7 +19,7 @@ public class Bullet : MonoBehaviour
         player = FindObjectOfType<PlayerController>().transform;
 
         ProcessDirection();
-
+        StartCoroutine(Suicide());
     }
 
     private void ProcessDirection()
@@ -39,5 +39,11 @@ public class Bullet : MonoBehaviour
             Destroy(this.gameObject);
         }
        
+    }
+
+    private IEnumerator Suicide()
+    {
+        yield return new WaitForSeconds(10);
+        Destroy(this.gameObject);
     }
 }

@@ -54,8 +54,9 @@ public class EnemySpawner : MonoBehaviour
     }
   public  float CalculateNewPoliceSpawnTime()
     {
-        if(timeBetweenPoliceSpawn< timeBetweenHumanSpawn)
+        if(timeBetweenPoliceSpawn <=  3)
         {
+            timeBetweenPoliceSpawn = 3;
             return timeBetweenPoliceSpawn;
         }
         float newSpawnTime = timeBetweenPoliceSpawn / 2;
