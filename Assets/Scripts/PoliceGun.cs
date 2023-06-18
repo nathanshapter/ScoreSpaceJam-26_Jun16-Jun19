@@ -44,6 +44,12 @@ public class PoliceGun : MonoBehaviour
     {
         var dir = target.transform.position - this.transform.position;
         var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + rotationOffset;
+
+        if (dir.x < 0) // If the target is on the left side
+            transform.localScale = new Vector3(-1f, -1f, 1f);
+        else if (dir.x > 0) // If the target is on the right side
+            transform.localScale = new Vector3(1f, 1f, 1f);
+
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 
