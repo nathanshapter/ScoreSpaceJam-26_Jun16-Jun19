@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class MainMenuCanvas : MonoBehaviour
 {
 
-    [SerializeField] GameObject playButton, highscoresButton, highScoresMenu;
+    [SerializeField] GameObject playButton, highscoresButton, highScoresMenu, controlsButton, controlsMenu;
 
     private void Start()
     {
@@ -25,6 +25,8 @@ public class MainMenuCanvas : MonoBehaviour
         playButton.SetActive(false);
         highscoresButton.SetActive(false);    
         highScoresMenu.SetActive(false);
+        controlsButton.SetActive(false);
+        controlsMenu.SetActive(false);
     }
 
     public void OpenHighScores()
@@ -39,5 +41,11 @@ public class MainMenuCanvas : MonoBehaviour
 
         playButton.SetActive(true);
         highscoresButton.SetActive(true);
+        controlsButton.SetActive(true);
+    }
+    public void OpenControlsMenu()
+    {
+        DisableAllUI();
+        controlsMenu.SetActive(true);
     }
 }
