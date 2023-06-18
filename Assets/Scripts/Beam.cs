@@ -32,6 +32,11 @@ public class Beam : MonoBehaviour
     private void Update()
     {
         beamBattery -= Time.deltaTime;
+        DisplayBattery();
+    }
+
+    public void DisplayBattery()
+    {
         beamBatteryText.text = $"Battery: {beamBattery}";
     }
     private void OnTriggerEnter2D(Collider2D collision)

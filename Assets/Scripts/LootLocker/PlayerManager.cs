@@ -29,7 +29,7 @@ public class PlayerManager : MonoBehaviour
             if (response.success)
             {
                 Debug.Log("Successfully set player Name");
-                StartCoroutine(LeaderBoard.instance.FetchTopHighScoresRoutine());
+                StartCoroutine(FindObjectOfType<LeaderBoard>().FetchTopHighScoresRoutine());
             }
             else
             {

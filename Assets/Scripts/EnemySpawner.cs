@@ -40,7 +40,7 @@ public class EnemySpawner : MonoBehaviour
     {
         
         yield return new WaitForSeconds(timeBetweenPoliceSpawn);
-        if (hrs.humansEaten >= hrs.beforePolice) { Instantiate(policeMan, spawnPoints[ChooseSpawnPoint()].position, Quaternion.identity); }
+         Instantiate(policeMan, spawnPoints[ChooseSpawnPoint()].position, Quaternion.identity); 
        
         StartCoroutine(SpawnPoliceMen());
     }

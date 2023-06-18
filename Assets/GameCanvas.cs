@@ -17,6 +17,8 @@ public class GameCanvas : MonoBehaviour
 
   [SerializeField]  EnemySpawner es;
 
+    
+
     private void Start()
     {
         gameOverMenu.SetActive(false);
@@ -24,6 +26,10 @@ public class GameCanvas : MonoBehaviour
     public void GameOver()
     {
         gameOverMenu.SetActive(true);
+    }
+    public void MainMenu()
+    {
+        SceneManager.LoadScene(0);
     }
     public void Reload()
     {
@@ -46,10 +52,14 @@ public class GameCanvas : MonoBehaviour
             humanReceivePoint.humansEaten= 0;
             PlayerHealth.instance.ResetHealth();
             PlayerHealth.instance.input.enabled = true;
+            PlayerHealth.instance.DisplayHealth();
             es.timeBetweenPoliceSpawn = 10;
             es.amountOfHumans= 0;
             beam.beamBattery = beam.beamBatteryStart;
             gameOverMenu.SetActive(false);
+            beam.DisplayBattery();
+            humanReceivePoint.DisplayScore();
+           
         }
 
        

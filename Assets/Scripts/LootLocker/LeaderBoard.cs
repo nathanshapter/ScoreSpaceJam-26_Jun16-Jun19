@@ -6,7 +6,7 @@ using TMPro;
 
 public class LeaderBoard : MonoBehaviour
 {
-    public static LeaderBoard instance;
+  //  public static LeaderBoard instance;
 
     int leaderBoardID = 15159;
 
@@ -15,12 +15,12 @@ public class LeaderBoard : MonoBehaviour
     
     private void Awake()
     {
-        if (instance == null)
+     //   if (instance == null)
         {
-            instance = this;
-            DontDestroyOnLoad(this);
+        //    instance = this;
+         //   DontDestroyOnLoad(this);
         }
-        else { Destroy(this.gameObject); }
+    //    else { Destroy(this.gameObject); }
     }
 
     public IEnumerator SubmitScoreRoutine(int scoreToUpload)

@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
    
 
     [SerializeField] SpriteRenderer beam;
+   [SerializeField] BoxCollider2D beamCollider;
    public Transform humanReceivePoint;
 
     bool beamState = false;

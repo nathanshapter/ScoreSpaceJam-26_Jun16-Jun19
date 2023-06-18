@@ -13,7 +13,7 @@ public class PlayerHealth : MonoBehaviour
     public TextMeshProUGUI healthText;
  public  PlayerInput input;
 
-    bool dead = false;
+   public bool dead = false;
     private void Awake()
     {
         if (instance == null)
@@ -26,6 +26,11 @@ public class PlayerHealth : MonoBehaviour
     private void Start()
     {
        ResetHealth();
+        DisplayHealth();
+    }
+
+    public void DisplayHealth()
+    {
         healthText.text = $"Health: {health}";
     }
 
@@ -37,22 +42,28 @@ public class PlayerHealth : MonoBehaviour
     }
     public void TakeDamage(int damage)
     {
-        health -= damage;
-
-        healthText.text = $"Health: {health}";
-       if(health <= 0 && !dead)
+        if(!dead)
         {
-            dead = true;
-            StartCoroutine(Die());
+            health -= damage;
 
-            GetComponentInChildren<HumanReceivePoint>().SubmitScore(); // and from here we have to fetch it for the top score
-            FindObjectOfType<GameCanvas>().GameOver();
+            healthText.text = $"Health: {health}";
+            if (health <= 0 && !dead)
+            {
+                dead = true;
+                StartCoroutine(Die());
 
+                GetComponentInChildren<HumanReceivePoint>().SubmitScore(); // and from here we have to fetch it for the top score
+                FindObjectOfType<GameCanvas>().GameOver();
+
+            }
         }
+
+       
     }
 
     private IEnumerator Die()
     {
+
         input.enabled = false;
         yield return new WaitForSeconds(1);
        

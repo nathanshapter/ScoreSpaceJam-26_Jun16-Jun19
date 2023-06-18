@@ -16,21 +16,24 @@ public class HumanReceivePoint : MonoBehaviour
     public int humansEaten;
 
    public int beforePolice = 10;
-    Beam beam;
+  [SerializeField]  Beam beam;
 
    [SerializeField] GameObject ground;
     private void Start()
     {
         boxCollider= GetComponent<BoxCollider2D>();
-        scoreText.text = $"Score: {inGameScore}";
-        beam = FindObjectOfType<Beam>();
+        DisplayScore();
+      
         
     }
-
+   public void DisplayScore()
+    {
+        scoreText.text = $"Score: {inGameScore}";
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Human"))
+        if (collision.gameObject.CompareTag("Human") && !PlayerHealth.instance.dead)
         {
             Destroy(collision.gameObject);
             beam.beamBattery++;
@@ -48,8 +51,8 @@ public class HumanReceivePoint : MonoBehaviour
             }
 
             CalculateScore();
-            scoreText.text = $"Score: {inGameScore}";
-
+           
+            DisplayScore();
             // when player dies pass this through to submitscore
             EnemySpawner.instance.amountOfHumans--;
             //  StartCoroutine(LeaderBoard.instance.FetchTopHighScoresRoutine());
@@ -77,7 +80,9 @@ public class HumanReceivePoint : MonoBehaviour
 
     public void SubmitScore()
     {
-        StartCoroutine(LeaderBoard.instance.SubmitScoreRoutine(inGameScore));
+        StartCoroutine(FindObjectOfType<LeaderBoard>().SubmitScoreRoutine(inGameScore));
+
+        
     }
 
    
