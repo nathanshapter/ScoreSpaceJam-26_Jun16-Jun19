@@ -15,39 +15,20 @@ public class Beam : MonoBehaviour
 
     Human h;
 
-    public float beamBattery = 1000;
-    public float beamBatteryStart = 25;
+  
     private void Start()
     {
-        ResetBeam();
+       
         boxCollider= GetComponent<BoxCollider2D>();
 
      
     }
-    public void ResetBeam()
-    {
-        beamBattery = beamBatteryStart;
-    }
+  
 
-    private void Update()
-    {
-        if(beamBattery <= 0)
-        {
-            beamBatteryText.text = "Bro stop trying to break my game lol, you have unlimited battery just chill";
-        }
-        else
-        {
-            DisplayBattery();
-        }
+  
+    
 
-        beamBattery -= Time.deltaTime;
-        
-    }
-
-    public void DisplayBattery()
-    {
-        beamBatteryText.text = $"Battery: {beamBattery}";
-    }
+   
     private void OnTriggerEnter2D(Collider2D collision)
     {
         

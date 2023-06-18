@@ -55,9 +55,9 @@ public class GameCanvas : MonoBehaviour
             PlayerHealth.instance.DisplayHealth();
             es.timeBetweenPoliceSpawn = 10;
             es.amountOfHumans= 0;
-            beam.beamBattery = beam.beamBatteryStart;
+         
             gameOverMenu.SetActive(false);
-            beam.DisplayBattery();
+         
             humanReceivePoint.DisplayScore();
            
         }

@@ -48,19 +48,17 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
-        if(cam == null)
+        if (cam == null)
         {
             cam = FindObjectOfType<CinemachineVirtualCamera>();
             cam.Follow = this.gameObject.transform;
             cam.LookAt = this.gameObject.transform;
         }
 
-     
-        // Smoothly move the object within the clamped position range
         Vector3 delta = rawInput;
+        delta *= moveSpeed * Time.fixedDeltaTime;
 
-      
-        targetPosition = transform.position + (delta * moveSpeed * Time.deltaTime);
+        targetPosition = transform.position + delta;
         targetPosition = new Vector3(
             Mathf.Clamp(targetPosition.x, clampMin.x, clampMax.x),
             Mathf.Clamp(targetPosition.y, clampMin.y, clampMax.y),
@@ -72,18 +70,18 @@ public class PlayerController : MonoBehaviour
             isMoving = true;
 
             if (delta.x > 0)
-                targetRotation = Quaternion.Euler(0f, 0f, -rotationAngle); // Rotate slightly to the right when moving right
+                targetRotation = Quaternion.Euler(0f, 0f, -rotationAngle);
             else if (delta.x < 0)
-                targetRotation = Quaternion.Euler(0f, 0f, rotationAngle); // Rotate slightly to the left when moving left
+                targetRotation = Quaternion.Euler(0f, 0f, rotationAngle);
         }
         else if (isMoving)
         {
             isMoving = false;
-            targetRotation = Quaternion.identity; // Reset the rotation when stopped
+            targetRotation = Quaternion.identity;
         }
 
         transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed); 
 
        
     }
