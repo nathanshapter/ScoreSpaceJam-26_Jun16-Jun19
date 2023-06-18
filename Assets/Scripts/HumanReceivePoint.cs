@@ -19,6 +19,10 @@ public class HumanReceivePoint : MonoBehaviour
   [SerializeField]  Beam beam;
 
    [SerializeField] GameObject ground;
+    [SerializeField] AudioClip eat, bloodSound;
+
+    [SerializeField] ParticleSystem blood;
+
     private void Start()
     {
         boxCollider= GetComponent<BoxCollider2D>();
@@ -36,9 +40,11 @@ public class HumanReceivePoint : MonoBehaviour
         if (collision.gameObject.CompareTag("Human") && !PlayerHealth.instance.dead)
         {
             Destroy(collision.gameObject);
-          
+            AudioManager.instance.PlaySound(eat, false);
             
             humansEaten++;
+            blood.Play();
+            StartCoroutine(PlayBloodSound());
            
             if(collision.GetComponent<Human>().isPoliceman)
             {
@@ -66,7 +72,11 @@ public class HumanReceivePoint : MonoBehaviour
             }
         }
     }
-
+    private IEnumerator PlayBloodSound()
+    {
+        yield return new WaitForSeconds(1);
+        AudioManager.instance.PlaySound(bloodSound, false);
+    }
     private int CalculateScore()
     {
         inGameScore += scoreForEatingHuman;

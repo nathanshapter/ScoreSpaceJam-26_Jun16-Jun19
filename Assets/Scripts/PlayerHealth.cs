@@ -14,6 +14,8 @@ public class PlayerHealth : MonoBehaviour
  public  PlayerInput input;
 
    public bool dead = false;
+
+    [SerializeField] AudioClip damageSound,gameOver;
     private void Awake()
     {
         if (instance == null)
@@ -45,7 +47,7 @@ public class PlayerHealth : MonoBehaviour
         if(!dead)
         {
             health -= damage;
-
+            AudioManager.instance.PlaySound(damageSound, false);
             healthText.text = $"Health: {health}";
             if (health <= 0 && !dead)
             {
@@ -62,7 +64,7 @@ public class PlayerHealth : MonoBehaviour
 
     public IEnumerator Die()
     {
-
+        AudioManager.instance.PlaySound(gameOver, false);
         input.enabled = false;
         yield return new WaitForSeconds(1);
         GetComponentInChildren<HumanReceivePoint>().SubmitScore(); // and from here we have to fetch it for the top score
