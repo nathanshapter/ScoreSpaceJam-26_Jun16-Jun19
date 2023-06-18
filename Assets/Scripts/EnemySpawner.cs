@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
@@ -9,13 +10,13 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] GameObject policeMan;
     [SerializeField] GameObject human;
 
-  
+    [SerializeField] HumanReceivePoint hrs;
 
 
     [SerializeField] Transform[] spawnPoints;
 
 
-    [SerializeField] float timeBetweenPoliceSpawn, timeBetweenHumanSpawn;
+   public float timeBetweenPoliceSpawn, timeBetweenHumanSpawn;
 
    public int maxHuman, amountOfHumans;
     private void Awake()
@@ -37,8 +38,10 @@ public class EnemySpawner : MonoBehaviour
 
     public IEnumerator SpawnPoliceMen()
     {
+        
         yield return new WaitForSeconds(timeBetweenPoliceSpawn);
-        Instantiate(policeMan, spawnPoints[ChooseSpawnPoint()].position, Quaternion.identity);
+        if (hrs.humansEaten >= hrs.beforePolice) { Instantiate(policeMan, spawnPoints[ChooseSpawnPoint()].position, Quaternion.identity); }
+       
         StartCoroutine(SpawnPoliceMen());
     }
 

@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -28,16 +29,28 @@ public class PlayerController : MonoBehaviour
 
     bool beamState = false;
     [SerializeField] TextMeshProUGUI beamBattery;
+    CinemachineVirtualCamera cam;
+
+    GameCanvas gameCanvas;
+
+    PlayerHealth health;
    
     private void Start()
     {
+        
         beam.gameObject.SetActive(false);
         beamBattery.text = "Battery";
     }
     void Update()
     {
+        if(cam == null)
+        {
+            cam = FindObjectOfType<CinemachineVirtualCamera>();
+            cam.Follow = this.gameObject.transform;
+            cam.LookAt = this.gameObject.transform;
+        }
 
-
+     
         // Smoothly move the object within the clamped position range
         Vector3 delta = rawInput;
 

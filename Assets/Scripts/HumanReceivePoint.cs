@@ -8,14 +8,14 @@ using UnityEngine.SocialPlatforms.Impl;
 public class HumanReceivePoint : MonoBehaviour
 {
     BoxCollider2D boxCollider;
-    [SerializeField] int inGameScore = 5;
+    public int inGameScore = 5;
     [SerializeField] TextMeshProUGUI scoreText;
 
 
    [SerializeField] int scoreForEatingHuman = 5;
     public int humansEaten;
 
-    [SerializeField] int beforePolice = 10;
+   public int beforePolice = 10;
     Beam beam;
 
    [SerializeField] GameObject ground;

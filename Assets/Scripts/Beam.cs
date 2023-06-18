@@ -16,11 +16,17 @@ public class Beam : MonoBehaviour
     Human h;
 
     public float beamBattery = 1000;
+    public float beamBatteryStart = 25;
     private void Start()
     {
+        ResetBeam();
         boxCollider= GetComponent<BoxCollider2D>();
 
      
+    }
+    public void ResetBeam()
+    {
+        beamBattery = beamBatteryStart;
     }
 
     private void Update()
