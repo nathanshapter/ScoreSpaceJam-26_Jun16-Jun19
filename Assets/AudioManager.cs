@@ -17,10 +17,18 @@ public class AudioManager : MonoBehaviour
         else { Destroy(this.gameObject); }
     }
 
-
-    public void PlaySound(AudioClip clip)
+    public void PlaySound(AudioClip clip, bool loop = false)
     {
-        effectsSource.PlayOneShot(clip);
+        if (loop)
+        {
+            effectsSource.clip = clip;
+            effectsSource.loop = true;
+            effectsSource.Play();
+        }
+        else
+        {
+            effectsSource.PlayOneShot(clip);
+        }
     }
 
     public void StopSound(AudioClip clip)
@@ -32,7 +40,4 @@ public class AudioManager : MonoBehaviour
     {
         AudioListener.volume = volume;
     }
-
-
-
 }

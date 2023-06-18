@@ -36,7 +36,7 @@ public class HumanReceivePoint : MonoBehaviour
         if (collision.gameObject.CompareTag("Human") && !PlayerHealth.instance.dead)
         {
             Destroy(collision.gameObject);
-            beam.beamBattery++;
+          
             
             humansEaten++;
            

@@ -31,8 +31,17 @@ public class Beam : MonoBehaviour
 
     private void Update()
     {
+        if(beamBattery <= 0)
+        {
+            beamBatteryText.text = "Bro stop trying to break my game lol, you have unlimited battery just chill";
+        }
+        else
+        {
+            DisplayBattery();
+        }
+
         beamBattery -= Time.deltaTime;
-        DisplayBattery();
+        
     }
 
     public void DisplayBattery()

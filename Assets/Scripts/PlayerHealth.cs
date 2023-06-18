@@ -52,8 +52,7 @@ public class PlayerHealth : MonoBehaviour
                 dead = true;
                 StartCoroutine(Die());
 
-                GetComponentInChildren<HumanReceivePoint>().SubmitScore(); // and from here we have to fetch it for the top score
-                FindObjectOfType<GameCanvas>().GameOver();
+               
 
             }
         }
@@ -61,11 +60,13 @@ public class PlayerHealth : MonoBehaviour
        
     }
 
-    private IEnumerator Die()
+    public IEnumerator Die()
     {
 
         input.enabled = false;
         yield return new WaitForSeconds(1);
-       
+        GetComponentInChildren<HumanReceivePoint>().SubmitScore(); // and from here we have to fetch it for the top score
+        FindObjectOfType<GameCanvas>().GameOver();
+
     }
 }

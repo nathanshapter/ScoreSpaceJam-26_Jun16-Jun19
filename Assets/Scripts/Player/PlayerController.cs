@@ -35,12 +35,16 @@ public class PlayerController : MonoBehaviour
     GameCanvas gameCanvas;
 
     PlayerHealth health;
+
+    [SerializeField] AudioClip ambient,  beamSound;
    
     private void Start()
     {
         
         beam.gameObject.SetActive(false);
         beamBattery.text = "Battery";
+        AudioManager.instance.PlaySound(ambient, true);
+        
     }
     void Update()
     {
@@ -91,7 +95,18 @@ public class PlayerController : MonoBehaviour
 
     public void OnFire(InputValue value)
     {
+       
+        
         beamState = !beamState;
         beam.gameObject.SetActive(beamState);
+
+        if (beamState)
+        {
+            AudioManager.instance.PlaySound(beamSound, true); // Pass true as the second argument to indicate looping
+        }
+        else
+        {
+            AudioManager.instance.StopSound(beamSound); // Stop the sound when beamState is false
+        }
     }
 }

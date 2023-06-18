@@ -463,7 +463,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_LocalRotation: {x: 1.2004e-41, y: -6.002e-42, z: 0, w: 1}
+  m_LocalRotation: {x: 1.3567e-41, y: -6.784e-42, z: 0, w: 1}
   m_LocalPosition: {x: 3.04, y: 2.79, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
@@ -3054,6 +3054,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1689262993, guid: 661af6498360b724c92cfcdb69ae4c76, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2362297252101948047, guid: 661af6498360b724c92cfcdb69ae4c76, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -3442,6 +3446,14 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6544606520886615665, guid: 65572249f5e61244e8f1bc3567c1173a, type: 3}
+      propertyPath: ambient
+      value: 
+      objectReference: {fileID: 8300000, guid: 04e9344c7d539594ca77bd59097be6ad, type: 3}
+    - target: {fileID: 6544606520886615665, guid: 65572249f5e61244e8f1bc3567c1173a, type: 3}
+      propertyPath: beamSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 5546a6cbf05b35b49ad3dfcafe30a6bf, type: 3}
+    - target: {fileID: 6544606520886615665, guid: 65572249f5e61244e8f1bc3567c1173a, type: 3}
       propertyPath: beamBattery
       value: 
       objectReference: {fileID: 1689262995}
@@ -3449,6 +3461,10 @@ PrefabInstance:
       propertyPath: beamCollider
       value: 
       objectReference: {fileID: 415353714}
+    - target: {fileID: 6544606520886615665, guid: 65572249f5e61244e8f1bc3567c1173a, type: 3}
+      propertyPath: ruleTheWorld
+      value: 
+      objectReference: {fileID: 8300000, guid: a801e10a3650b184dbd6e54b483096cd, type: 3}
     - target: {fileID: 6544606521217101067, guid: 65572249f5e61244e8f1bc3567c1173a, type: 3}
       propertyPath: beam
       value: 
