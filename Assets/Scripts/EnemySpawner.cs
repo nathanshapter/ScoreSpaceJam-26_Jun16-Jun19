@@ -35,15 +35,32 @@ public class EnemySpawner : MonoBehaviour
 
        
     }
-
+    bool coroutineRunning;
     public IEnumerator SpawnPoliceMen()
     {
-        
+        if (coroutineRunning)
+        {
+            yield break; // Exit the coroutine if it is already running
+        }
+
+        coroutineRunning = true; // Set the flag to indicate that the coroutine is running
+
         yield return new WaitForSeconds(timeBetweenPoliceSpawn);
-        // need to add logic to check for if its time for police so they arent spawning instantly...
-         Instantiate(policeMan, spawnPoints[ChooseSpawnPoint()].position, Quaternion.identity); 
-       
-        StartCoroutine(SpawnPoliceMen());
+
+        // Add logic to check if it's time to spawn police and prevent instant spawning
+
+        if (amountOfHumans >= 15)
+        {
+            Instantiate(policeMan, spawnPoints[ChooseSpawnPoint()].position, Quaternion.identity);
+            CalculateNewPoliceSpawnTime();
+        }
+        else
+        {
+            timeBetweenPoliceSpawn = 20;
+        }
+
+        coroutineRunning = false;
+
     }
 
     public IEnumerator SpawnHuman()
@@ -60,11 +77,7 @@ public class EnemySpawner : MonoBehaviour
     }
   public  float CalculateNewPoliceSpawnTime()
     {
-        if(timeBetweenPoliceSpawn <=  3)
-        {
-            timeBetweenPoliceSpawn = 3;
-            return timeBetweenPoliceSpawn;
-        }
+       
         float newSpawnTime = timeBetweenPoliceSpawn / 2;
         timeBetweenPoliceSpawn= newSpawnTime;
         return timeBetweenPoliceSpawn;

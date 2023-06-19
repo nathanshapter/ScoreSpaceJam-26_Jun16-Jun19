@@ -67,8 +67,8 @@ public class HumanReceivePoint : MonoBehaviour
             {
                 
               StartCoroutine(EnemySpawner.instance.SpawnPoliceMen());
-                EnemySpawner.instance.CalculateNewPoliceSpawnTime();
-                humansEaten = 0;
+              //  EnemySpawner.instance.CalculateNewPoliceSpawnTime();
+              // humansEaten = 0;
             }
         }
     }
