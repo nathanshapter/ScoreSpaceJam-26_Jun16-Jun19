@@ -40,6 +40,7 @@ public class EnemySpawner : MonoBehaviour
     {
         
         yield return new WaitForSeconds(timeBetweenPoliceSpawn);
+        // need to add logic to check for if its time for police so they arent spawning instantly...
          Instantiate(policeMan, spawnPoints[ChooseSpawnPoint()].position, Quaternion.identity); 
        
         StartCoroutine(SpawnPoliceMen());
