@@ -19,6 +19,8 @@ public class EnemySpawner : MonoBehaviour
    public float timeBetweenPoliceSpawn, timeBetweenHumanSpawn;
 
    public int maxHuman, amountOfHumans;
+
+   [SerializeField] PoliceGun[] gunsCheck;
     private void Awake()
     {
         if (instance == null)
@@ -34,6 +36,18 @@ public class EnemySpawner : MonoBehaviour
         StartCoroutine(SpawnHuman());
 
        
+    }
+
+    private void Update()
+    {
+
+        if(Input.GetKeyDown(KeyCode.V))
+        {
+            print("stopped");
+            StopCoroutine(SpawnPoliceMen());
+        }
+
+        
     }
     bool coroutineRunning;
     public IEnumerator SpawnPoliceMen()
@@ -74,6 +88,13 @@ public class EnemySpawner : MonoBehaviour
         
    
         StartCoroutine(SpawnHuman());
+
+        gunsCheck = FindObjectsOfType<PoliceGun>();
+        if(gunsCheck.Length <= 5 && amountOfHumans >= 15 && coroutineRunning == false)
+        {
+            print("COROUTINE RESTARTED");
+            StartCoroutine(SpawnPoliceMen());
+        }
     }
   public  float CalculateNewPoliceSpawnTime()
     {
