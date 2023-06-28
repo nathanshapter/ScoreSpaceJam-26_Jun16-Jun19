@@ -105,7 +105,7 @@ public class EnemySpawner : MonoBehaviour
         gunsCheck = FindObjectsOfType<PoliceGun>();
         if(gunsCheck.Length <= 5 && amountOfHumans >= 15 && coroutineRunning == false)
         {
-            print("COROUTINE RESTARTED");
+          
             StartCoroutine(SpawnPoliceMen());
         }
     }

@@ -29,7 +29,7 @@ public class Beam : MonoBehaviour
         Transform beamTransform = this.transform;
 
         Vector3 scale = beamTransform.localScale;
-        scale.x *= upgradeSize;
+        scale.y *= upgradeSize;
         beamTransform.localScale = scale;
     }
   
