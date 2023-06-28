@@ -11,6 +11,7 @@ public class Human : MonoBehaviour
     public float moveSpeed = 5f;
 
   public  Rigidbody2D rb;
+    public bool isBeingSucked = false;
  public   bool canMove = true;
   [SerializeField]  bool isMovingRight = true;
 
@@ -97,7 +98,7 @@ public class Human : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        if (collision.gameObject.CompareTag("Ground") && !isBeingSucked)
         {
           
             canMove = true;

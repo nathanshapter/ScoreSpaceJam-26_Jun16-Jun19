@@ -14,9 +14,10 @@ public class EnemySpawner : MonoBehaviour
 
 
     [SerializeField] Transform[] spawnPoints;
+    GameCanvas canvas;
+   
 
-
-   public float timeBetweenPoliceSpawn, timeBetweenHumanSpawn;
+    public float timeBetweenPoliceSpawn, timeBetweenHumanSpawn;
 
    public int maxHuman, amountOfHumans;
 
@@ -33,9 +34,19 @@ public class EnemySpawner : MonoBehaviour
 
     private void Start()
     {
+        canvas = FindObjectOfType<GameCanvas>();
         StartCoroutine(SpawnHuman());
+        amountOfHumans = FindObjectsOfType<Human>().Length;
+      
+    }
 
+    public void UpdateCanvas()
+    {
+        amountOfHumans = FindObjectsOfType<Human>().Length;
        
+
+        canvas.humanAmountText.text = $"x {amountOfHumans}";
+        canvas.copAmountText.text = $"x {gunsCheck.Length}";
     }
 
     private void Update()
@@ -66,6 +77,7 @@ public class EnemySpawner : MonoBehaviour
         if (amountOfHumans >= 15)
         {
             Instantiate(policeMan, spawnPoints[ChooseSpawnPoint()].position, Quaternion.identity);
+
             CalculateNewPoliceSpawnTime();
         }
         else
@@ -83,7 +95,8 @@ public class EnemySpawner : MonoBehaviour
         if (!TooManyHumans())
         {
             Instantiate(human, spawnPoints[ChooseSpawnPoint()].position, Quaternion.identity);
-            amountOfHumans++;
+           
+            UpdateCanvas();
         }
         
    

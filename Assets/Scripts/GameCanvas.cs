@@ -17,11 +17,13 @@ public class GameCanvas : MonoBehaviour
 
   [SerializeField]  EnemySpawner es;
 
-    
-
+   
+   public TextMeshProUGUI humanAmountText, copAmountText;
     private void Start()
     {
+        humanAmountText.text = "x 0";
         gameOverMenu.SetActive(false);
+      
     }
     public void GameOver()
     {

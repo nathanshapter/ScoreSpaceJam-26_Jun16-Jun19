@@ -47,6 +47,7 @@ public class Beam : MonoBehaviour
            
             h.target = humanReceivePoint.transform;
             h.rb.gravityScale = 0;
+            collision.gameObject.GetComponent<Human>().isBeingSucked = true;
             h.canMove= false;
         }
     }
@@ -62,6 +63,7 @@ public class Beam : MonoBehaviour
             h.target = null;
             h.rb.gravityScale = 1;
             h.rb.constraints = RigidbodyConstraints2D.None;
+            collision.gameObject.GetComponent<Human>().isBeingSucked = false;
         }
     }
 

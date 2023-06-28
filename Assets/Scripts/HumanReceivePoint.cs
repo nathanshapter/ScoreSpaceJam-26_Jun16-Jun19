@@ -23,12 +23,16 @@ public class HumanReceivePoint : MonoBehaviour
 
     [SerializeField] ParticleSystem blood;
 
+   EnemySpawner es;
+   
     private void Start()
     {
+        es = FindObjectOfType<EnemySpawner>();
+
         boxCollider= GetComponent<BoxCollider2D>();
         DisplayScore();
-      
-        
+     
+
     }
    public void DisplayScore()
     {
@@ -43,6 +47,9 @@ public class HumanReceivePoint : MonoBehaviour
             AudioManager.instance.PlaySound(eat, false);
             
             humansEaten++;
+          
+            es.UpdateCanvas();
+            es.amountOfHumans--;
             blood.Play();
             StartCoroutine(PlayBloodSound());
            
