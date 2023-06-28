@@ -12,9 +12,9 @@ public class Beam : MonoBehaviour
 
 
 
-
+    public float suckedMoveSpeed = 5f;
     Human h;
-
+    public float beamSizeX;
   
     private void Start()
     {
@@ -24,9 +24,19 @@ public class Beam : MonoBehaviour
      
     }
   
+    public void UpgradeBeam(float upgradeSize)
+    {
+        Transform beamTransform = this.transform;
 
+        Vector3 scale = beamTransform.localScale;
+        scale.x *= upgradeSize;
+        beamTransform.localScale = scale;
+    }
   
-    
+    public void UpgradeBeamSpeed(float upgradeSpeed)
+    {
+        suckedMoveSpeed *= upgradeSpeed;
+    }
 
    
     private void OnTriggerEnter2D(Collider2D collision)
@@ -46,6 +56,7 @@ public class Beam : MonoBehaviour
           
            
             h.target = humanReceivePoint.transform;
+
             h.rb.gravityScale = 0;
             collision.gameObject.GetComponent<Human>().isBeingSucked = true;
             h.canMove= false;

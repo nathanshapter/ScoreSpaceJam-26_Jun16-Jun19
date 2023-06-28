@@ -7,7 +7,7 @@ public class Human : MonoBehaviour
 
    public PoliceGun gunref;
    public Transform target;
-    public float suckedMoveSpeed = 5f;
+   
     public float moveSpeed = 5f;
 
   public  Rigidbody2D rb;
@@ -22,12 +22,15 @@ public class Human : MonoBehaviour
    [SerializeField] Animator anim;
 
    public bool isPoliceman;
+
+    Beam beam;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         leftPosition = FindObjectOfType<HumanLimit>().leftLimit;
         rightPosition = FindObjectOfType<HumanLimit>().rightLimit;
         anim = GetComponentInChildren<Animator>();
+        beam = FindObjectOfType<Beam>();
         if(GetComponentInChildren<PoliceGun>() != null)
         {
             isPoliceman = true;
@@ -81,8 +84,11 @@ public class Human : MonoBehaviour
       
 
         if (target == null) return;
-
-        Vector3 newPosition = Vector3.MoveTowards(transform.position, target.transform.position, suckedMoveSpeed * Time.deltaTime);
+        if(beam == null)
+        {
+            beam = FindObjectOfType<Beam>();
+        }
+        Vector3 newPosition = Vector3.MoveTowards(transform.position, target.transform.position, beam.suckedMoveSpeed * Time.deltaTime);
         transform.position = newPosition;
     }
 
