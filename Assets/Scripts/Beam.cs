@@ -64,6 +64,7 @@ public class Beam : MonoBehaviour
             h.rb.gravityScale = 1;
             h.rb.constraints = RigidbodyConstraints2D.None;
             collision.gameObject.GetComponent<Human>().isBeingSucked = false;
+            collision.gameObject.GetComponent<Human>().moveSpeed *= 1.3f;
         }
     }
 
