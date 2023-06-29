@@ -16,14 +16,14 @@ public class GameCanvas : MonoBehaviour
     [SerializeField] GameObject gameOverMenu;
 
   [SerializeField]  EnemySpawner es;
-
+    PlayerController playerController;
    
    public TextMeshProUGUI humanAmountText, copAmountText;
     private void Start()
     {
         humanAmountText.text = "x 0";
         gameOverMenu.SetActive(false);
-      
+        playerController = FindObjectOfType<PlayerController>();
     }
     public void GameOver()
     {
@@ -49,6 +49,9 @@ public class GameCanvas : MonoBehaviour
             {
                 Destroy(item.gameObject);
             }
+            playerController.moveSpeed = playerController.moveSpeedoriginal;
+            health.health = health.startingHealth;
+            beam.ReturnBeamToNormal();
             humanReceivePoint = FindObjectOfType<HumanReceivePoint>();
             humanReceivePoint.inGameScore = 0;
             humanReceivePoint.humansEaten= 0;

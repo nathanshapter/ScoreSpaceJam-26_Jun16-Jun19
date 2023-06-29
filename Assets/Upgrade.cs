@@ -12,11 +12,15 @@ public class Upgrade : MonoBehaviour
     UpgradesManager uManager;
 
     [SerializeField] float selfDestructTimer = 10;
+
+    PlayerController player;
     private void Start()
     {
         uManager = GetComponentInParent<UpgradesManager>();
 
         StartCoroutine(SelfDestruct());
+
+        player = FindObjectOfType<PlayerController>();
     }
 
 
@@ -24,7 +28,7 @@ public class Upgrade : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            PlayerController player = collision.gameObject.GetComponent<PlayerController>();
+          
 
             if(beamSize)
             {
@@ -43,7 +47,11 @@ public class Upgrade : MonoBehaviour
             }
             if(movementSpeed)
             {
-                player.moveSpeed *= movementSpeedUpgrade;
+                if(player != null)
+                {
+                    player.moveSpeed *= movementSpeedUpgrade;
+                }
+                
             }
             if (health)
             {

@@ -6,7 +6,9 @@ using UnityEngine.InputSystem;
 
 public class PlayerHealth : MonoBehaviour
 {
-   public int startingHealth = 500;
+    public int startingHealth = 500;
+   
+
     public int health;
 
     public static PlayerHealth instance;
@@ -29,6 +31,7 @@ public class PlayerHealth : MonoBehaviour
     {
        ResetHealth();
         DisplayHealth();
+        health = startingHealth;
     }
 
     public void DisplayHealth()

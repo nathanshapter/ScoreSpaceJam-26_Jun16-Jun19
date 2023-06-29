@@ -14,12 +14,15 @@ public class Beam : MonoBehaviour
     BoxCollider2D boxCollider2D;
 
     public float suckedMoveSpeed = 5f;
+    public float suckedMoveSpeedOriginal = 5f;
     Human h;
     public float beamSizeX;
+    public float beamSizeXOriginal;
   
     private void Start()
     {
-       
+        suckedMoveSpeedOriginal = suckedMoveSpeed;
+        beamSizeXOriginal= beamSizeX;
         boxCollider= GetComponent<BoxCollider2D>();
         spriteRenderer= GetComponent<SpriteRenderer>();
         boxCollider2D = GetComponent<BoxCollider2D>();
@@ -32,6 +35,13 @@ public class Beam : MonoBehaviour
 
         Vector3 scale = beamTransform.localScale;
         scale.y *= upgradeSize;
+        beamTransform.localScale = scale;
+    }
+    public void ReturnBeamToNormal()
+    {
+        Transform beamTransform = this.transform;
+        Vector3 scale = beamTransform.localScale;
+        scale.y = 1;
         beamTransform.localScale = scale;
     }
   

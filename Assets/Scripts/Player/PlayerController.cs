@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     bool isMoving;
 
     public float moveSpeed;
+    public float moveSpeedoriginal;
     [SerializeField] float smoothTime = 0.1f;
     [SerializeField] float rotationAngle = 15f; // Adjust the desired rotation angle
     [SerializeField] float rotationSpeed = 5f; // Adjust the rotation speed
@@ -43,7 +44,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         beam = GetComponentInChildren<Beam>();
-   
+        moveSpeedoriginal = moveSpeed;
         //   beam.gameObject.SetActive(false);
         beamBattery.text = "Battery";
         AudioManager.instance.PlaySound(ambient, true);
