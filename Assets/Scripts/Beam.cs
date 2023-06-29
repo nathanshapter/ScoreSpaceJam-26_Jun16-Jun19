@@ -18,7 +18,11 @@ public class Beam : MonoBehaviour
     Human h;
     public float beamSizeX;
     public float beamSizeXOriginal;
-  
+
+
+    public Vector3 minScale = new Vector3(2.11f, 1, 1);
+    public Vector3 maxScale = new Vector3(2.11f, 5, 1);
+
     private void Start()
     {
         suckedMoveSpeedOriginal = suckedMoveSpeed;
@@ -28,7 +32,20 @@ public class Beam : MonoBehaviour
         boxCollider2D = GetComponent<BoxCollider2D>();
         TurnOffBeam(false);
     }
-  
+    private void Update()
+    {
+        Vector3 currentScale = transform.localScale;
+
+        // clamping the object size
+
+        Vector3 clampedScale = new Vector3(
+              Mathf.Clamp(currentScale.x, minScale.x, maxScale.x),
+              Mathf.Clamp(currentScale.y, minScale.y, maxScale.y),
+              Mathf.Clamp(currentScale.z, minScale.z, maxScale.z)
+          );
+
+        transform.localScale = clampedScale;
+    }
     public void UpgradeBeam(float upgradeSize)
     {
         Transform beamTransform = this.transform;

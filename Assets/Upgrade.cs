@@ -30,20 +30,20 @@ public class Upgrade : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-           
+           Beam beam = player.GetComponentInChildren<Beam>();
 
-            if(beamSize && player.GetComponentInChildren<Beam>().beamSizeX <= beamSizecap)
+            if(beamSize && beam.beamSizeX <= beamSizecap)
             {
-                if(player.GetComponentInChildren<Beam>() != null)
+                if(beam != null)
                 {
-                    player.GetComponentInChildren<Beam>().UpgradeBeam(beamSizeUpgrade);
+                    beam.UpgradeBeam(beamSizeUpgrade);
                 }
                
             }
-            if (beamSpeed && player.GetComponentInChildren<Beam>().suckedMoveSpeed <= suckedSpeedCap)
+            if (beamSpeed && beam.suckedMoveSpeed <= suckedSpeedCap)
             {
-                if (player.GetComponentInChildren<Beam>() != null)
-                { player.GetComponentInChildren<Beam>().UpgradeBeamSpeed(beamSpeedUpgrade); }
+                if (beam != null)
+                { beam.UpgradeBeamSpeed(beamSpeedUpgrade); }
 
                
             }
