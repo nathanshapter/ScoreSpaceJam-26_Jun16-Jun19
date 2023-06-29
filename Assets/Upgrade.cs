@@ -14,6 +14,8 @@ public class Upgrade : MonoBehaviour
     [SerializeField] float selfDestructTimer = 10;
 
     PlayerController player;
+
+    [SerializeField] float movementSpeedCap = 35, suckedSpeedCap = 6, beamSizecap = 5;
     private void Start()
     {
         uManager = GetComponentInParent<UpgradesManager>();
@@ -28,9 +30,9 @@ public class Upgrade : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-          
+           
 
-            if(beamSize)
+            if(beamSize && player.GetComponentInChildren<Beam>().beamSizeX <= beamSizecap)
             {
                 if(player.GetComponentInChildren<Beam>() != null)
                 {
@@ -38,14 +40,14 @@ public class Upgrade : MonoBehaviour
                 }
                
             }
-            if (beamSpeed)
+            if (beamSpeed && player.GetComponentInChildren<Beam>().suckedMoveSpeed <= suckedSpeedCap)
             {
                 if (player.GetComponentInChildren<Beam>() != null)
                 { player.GetComponentInChildren<Beam>().UpgradeBeamSpeed(beamSpeedUpgrade); }
 
                
             }
-            if(movementSpeed)
+            if(movementSpeed && player.moveSpeed <=movementSpeedCap)
             {
                 if(player != null)
                 {
