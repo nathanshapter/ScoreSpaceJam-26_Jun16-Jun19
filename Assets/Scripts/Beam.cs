@@ -10,7 +10,8 @@ public class Beam : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI beamBatteryText;
 
-
+    SpriteRenderer spriteRenderer;
+    BoxCollider2D boxCollider2D;
 
     public float suckedMoveSpeed = 5f;
     Human h;
@@ -20,8 +21,9 @@ public class Beam : MonoBehaviour
     {
        
         boxCollider= GetComponent<BoxCollider2D>();
-
-     
+        spriteRenderer= GetComponent<SpriteRenderer>();
+        boxCollider2D = GetComponent<BoxCollider2D>();
+        TurnOffBeam(false);
     }
   
     public void UpgradeBeam(float upgradeSize)
@@ -38,7 +40,11 @@ public class Beam : MonoBehaviour
         suckedMoveSpeed *= upgradeSpeed;
     }
 
-   
+   public void TurnOffBeam(bool swiff)
+    {
+        spriteRenderer.enabled = swiff;
+        boxCollider.enabled = swiff;
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         

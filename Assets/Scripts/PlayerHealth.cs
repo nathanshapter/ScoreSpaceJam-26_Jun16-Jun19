@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [SerializeField] int startingHealth = 500;
+   public int startingHealth = 500;
     public int health;
 
     public static PlayerHealth instance;

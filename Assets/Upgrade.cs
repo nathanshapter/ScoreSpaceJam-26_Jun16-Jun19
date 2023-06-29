@@ -6,9 +6,18 @@ public class Upgrade : MonoBehaviour
 {
 
     [SerializeField] bool beamSize, movementSpeed, beamSpeed, health;
-    [SerializeField] float beamSizeUpgrade, movementSpeedUpgrade, beamSpeedUpgrade, healthUpgrade;
+    [SerializeField] float beamSizeUpgrade, movementSpeedUpgrade, beamSpeedUpgrade;
+    [SerializeField] int healthIncrease;
 
+    UpgradesManager uManager;
 
+    [SerializeField] float selfDestructTimer = 10;
+    private void Start()
+    {
+        uManager = GetComponentInParent<UpgradesManager>();
+
+        StartCoroutine(SelfDestruct());
+    }
 
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -19,14 +28,36 @@ public class Upgrade : MonoBehaviour
 
             if(beamSize)
             {
-                player.GetComponentInChildren<Beam>().UpgradeBeam(beamSizeUpgrade);
+                if(player.GetComponentInChildren<Beam>() != null)
+                {
+                    player.GetComponentInChildren<Beam>().UpgradeBeam(beamSizeUpgrade);
+                }
+               
             }
             if (beamSpeed)
             {
-                player.GetComponentInChildren<Beam>().UpgradeBeamSpeed(beamSpeedUpgrade);
+                if (player.GetComponentInChildren<Beam>() != null)
+                { player.GetComponentInChildren<Beam>().UpgradeBeamSpeed(beamSpeedUpgrade); }
+
+               
+            }
+            if(movementSpeed)
+            {
+                player.moveSpeed *= movementSpeedUpgrade;
+            }
+            if (health)
+            {
+                PlayerHealth.instance.health += healthIncrease;
+                PlayerHealth.instance.DisplayHealth();
             }
             Destroy(this.gameObject);
         }
        
+    }
+
+    private IEnumerator SelfDestruct()
+    {
+        yield return new WaitForSeconds(selfDestructTimer);
+        Destroy(this.gameObject);
     }
 }

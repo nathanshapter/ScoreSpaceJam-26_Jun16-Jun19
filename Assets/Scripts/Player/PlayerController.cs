@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     Quaternion targetRotation;
     bool isMoving;
 
-    [SerializeField] float moveSpeed;
+    public float moveSpeed;
     [SerializeField] float smoothTime = 0.1f;
     [SerializeField] float rotationAngle = 15f; // Adjust the desired rotation angle
     [SerializeField] float rotationSpeed = 5f; // Adjust the rotation speed
@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Vector2 clampMax = new Vector2(5f, 5f); // Define the maximum position values
    
 
-    [SerializeField] SpriteRenderer beam;
+ //   [SerializeField] SpriteRenderer beam;
    [SerializeField] BoxCollider2D beamCollider;
    public Transform humanReceivePoint;
 
@@ -37,11 +37,14 @@ public class PlayerController : MonoBehaviour
     PlayerHealth health;
 
     [SerializeField] AudioClip ambient,  beamSound;
+
+    Beam beam;
    
     private void Start()
     {
-        
-        beam.gameObject.SetActive(false);
+        beam = GetComponentInChildren<Beam>();
+   
+        //   beam.gameObject.SetActive(false);
         beamBattery.text = "Battery";
         AudioManager.instance.PlaySound(ambient, true);
         
@@ -96,7 +99,9 @@ public class PlayerController : MonoBehaviour
        
         
         beamState = !beamState;
-        beam.gameObject.SetActive(beamState);
+        // beam.gameObject.SetActive(beamState);
+        beam.TurnOffBeam(beamState);
+        
 
         if (beamState)
         {
