@@ -5,7 +5,7 @@ using UnityEngine;
 public class Upgrade : MonoBehaviour
 {
 
-    [SerializeField] bool beamSize, movementSpeed, beamSpeed, health;
+
     [SerializeField] float beamSizeUpgrade, movementSpeedUpgrade, beamSpeedUpgrade;
     [SerializeField] int healthIncrease;
 
@@ -13,61 +13,44 @@ public class Upgrade : MonoBehaviour
 
     [SerializeField] float selfDestructTimer = 10;
 
-    PlayerController player;
+  [SerializeField]  PlayerController player;
 
     [SerializeField] float movementSpeedCap = 35, suckedSpeedCap = 6, beamSizecap = 5;
+
+  [SerializeField]  Beam beam;
     private void Start()
     {
         uManager = GetComponentInParent<UpgradesManager>();
 
         StartCoroutine(SelfDestruct());
-
-        player = FindObjectOfType<PlayerController>();
-    }
-
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-           Beam beam = player.GetComponentInChildren<Beam>();
-
-            if(beamSize && beam.beamSizeX <= beamSizecap)
-            {
-                if(beam != null)
-                {
-                    beam.UpgradeBeam(beamSizeUpgrade);
-                }
-               
-            }
-            if (beamSpeed && beam.suckedMoveSpeed <= suckedSpeedCap)
-            {
-                if (beam != null)
-                { beam.UpgradeBeamSpeed(beamSpeedUpgrade); }
-
-               
-            }
-            if(movementSpeed && player.moveSpeed <=movementSpeedCap)
-            {
-                if(player != null)
-                {
-                    player.moveSpeed *= movementSpeedUpgrade;
-                }
-                
-            }
-            if (health)
-            {
-                PlayerHealth.instance.health += healthIncrease;
-                PlayerHealth.instance.DisplayHealth();
-            }
-            Destroy(this.gameObject);
-        }
        
+        player = FindObjectOfType<PlayerController>();
+        beam = player.GetComponentInChildren<Beam>();
     }
+    
+
 
     private IEnumerator SelfDestruct()
     {
         yield return new WaitForSeconds(selfDestructTimer);
         Destroy(this.gameObject);
+    }
+
+    public void IncreaseBeamSize()
+    {
+        beam.UpgradeBeam(beamSizeUpgrade);
+    }
+    public void BeamSpeedUpgrade()
+    {
+        beam.UpgradeBeamSpeed(beamSpeedUpgrade);
+    }
+    public void MoveSpeedUpgrade()
+    {
+        player.moveSpeed *= movementSpeedUpgrade;
+    }
+    public void HealthIncrease()
+    {
+        PlayerHealth.instance.health += healthIncrease;
+        PlayerHealth.instance.DisplayHealth();
     }
 }

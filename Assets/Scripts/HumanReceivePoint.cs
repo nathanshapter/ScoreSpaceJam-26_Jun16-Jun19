@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -30,6 +31,8 @@ public class HumanReceivePoint : MonoBehaviour
     int combo;
     GameCanvas canvas;
 
+    UpgradeMenu upgradeMenu;
+
     private void Start()
     {
         canvas = FindObjectOfType<GameCanvas>();
@@ -38,7 +41,7 @@ public class HumanReceivePoint : MonoBehaviour
         boxCollider= GetComponent<BoxCollider2D>();
         DisplayScore();
      
-        
+        upgradeMenu = FindObjectOfType<UpgradeMenu>();
     }
 
     private void Update()
@@ -55,9 +58,17 @@ public class HumanReceivePoint : MonoBehaviour
            
         }
     }
+    int numberToUse = 0;
+    int amountOfUpgrades = 0;
     public void DisplayScore()
     {
         scoreText.text = $"Score: {inGameScore}";
+        if (inGameScore >= 1000 && inGameScore / 1000 > numberToUse)
+        {
+            numberToUse = inGameScore / 1000;
+            amountOfUpgrades++;
+            upgradeMenu.SwitchMenu(true);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
