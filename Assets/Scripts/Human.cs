@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Human : MonoBehaviour
@@ -24,8 +25,10 @@ public class Human : MonoBehaviour
    public bool isPoliceman;
 
     Beam beam;
+
     private void Start()
     {
+        this.transform.SetParent(EnemySpawner.instance.transform, false);
         rb = GetComponent<Rigidbody2D>();
         leftPosition = FindObjectOfType<HumanLimit>().leftLimit;
         rightPosition = FindObjectOfType<HumanLimit>().rightLimit;
@@ -42,11 +45,11 @@ public class Human : MonoBehaviour
             isMovingRight = false;
             FlipCharacter();
         }
-      
-        
+
+       
     }
 
-
+ 
 
     private void Update()
     {

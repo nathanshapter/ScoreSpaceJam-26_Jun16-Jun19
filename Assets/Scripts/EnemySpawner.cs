@@ -8,7 +8,7 @@ public class EnemySpawner : MonoBehaviour
     public static EnemySpawner instance;
 
     [SerializeField] GameObject policeMan;
-    [SerializeField] GameObject human;
+    [SerializeField] GameObject[] human;
 
     [SerializeField] HumanReceivePoint hrs;
 
@@ -37,7 +37,7 @@ public class EnemySpawner : MonoBehaviour
         canvas = FindObjectOfType<GameCanvas>();
         StartCoroutine(SpawnHuman());
         amountOfHumans = FindObjectsOfType<Human>().Length;
-      
+    
     }
 
     public void UpdateCanvas()
@@ -89,13 +89,21 @@ public class EnemySpawner : MonoBehaviour
 
     }
 
+    int enemyToSpawn = 0;
     public IEnumerator SpawnHuman()
     {
+        
+
+        if(enemyToSpawn > human.Length -1)
+        {
+            enemyToSpawn = 0;
+        }
+
         yield return new WaitForSeconds(timeBetweenHumanSpawn);
         if (!TooManyHumans())
         {
-            Instantiate(human, spawnPoints[ChooseSpawnPoint()].position, Quaternion.identity);
-           
+            Instantiate(human[enemyToSpawn], spawnPoints[ChooseSpawnPoint()].position, Quaternion.identity);
+            enemyToSpawn++;
             UpdateCanvas();
         }
         
