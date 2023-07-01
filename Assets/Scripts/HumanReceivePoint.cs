@@ -27,17 +27,23 @@ public class HumanReceivePoint : MonoBehaviour
 
   [SerializeField]  float comboTimer;
     int combo;
+    GameCanvas canvas;
 
     private void Start()
     {
+        canvas = FindObjectOfType<GameCanvas>();
         es = FindObjectOfType<EnemySpawner>();
 
         boxCollider= GetComponent<BoxCollider2D>();
         DisplayScore();
      
-
+        
     }
 
+    private void Update()
+    {
+        canvas.comboText.text = $"Combo: {combo}";
+    }
     private void FixedUpdate()
     {
         comboTimer -= Time.deltaTime;

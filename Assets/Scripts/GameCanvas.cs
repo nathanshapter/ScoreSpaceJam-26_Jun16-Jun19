@@ -18,7 +18,7 @@ public class GameCanvas : MonoBehaviour
   [SerializeField]  EnemySpawner es;
     PlayerController playerController;
    
-   public TextMeshProUGUI humanAmountText, copAmountText;
+   public TextMeshProUGUI humanAmountText, copAmountText, comboText;
     private void Start()
     {
         humanAmountText.text = "x 0";
