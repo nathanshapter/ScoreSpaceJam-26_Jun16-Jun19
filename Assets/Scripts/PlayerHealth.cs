@@ -55,6 +55,7 @@ public class PlayerHealth : MonoBehaviour
             if (health <= 0 && !dead)
             {
                 dead = true;
+                FindObjectOfType<UpgradeMenu>().SwitchMenu(false);
                 StartCoroutine(Die());
 
                

@@ -9,10 +9,17 @@ public class UpgradeMenu : MonoBehaviour
     [SerializeField] GameObject[] allUpgradeUI;
     HumanReceivePoint hrs;
 
+
+    PlayerHealth player;
+    Beam beam;
+
+    [SerializeField] int healthUpgrade;
     private void Start()
     {
         SwitchMenu(false);
         hrs = FindObjectOfType<HumanReceivePoint>();
+        player = FindObjectOfType<PlayerHealth>();
+        beam= player.GetComponentInChildren<Beam>();
     }
   
 
@@ -28,5 +35,12 @@ public class UpgradeMenu : MonoBehaviour
 
     }
 
-    
+    public void RestoreHealth()
+    {
+        player.health = player.startingHealth;
+        player.DisplayHealth();
+        SwitchMenu(false);
+    }
+
+
 }
