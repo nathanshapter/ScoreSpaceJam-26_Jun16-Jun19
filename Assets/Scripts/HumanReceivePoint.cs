@@ -26,6 +26,7 @@ public class HumanReceivePoint : MonoBehaviour
    EnemySpawner es;
 
   [SerializeField]  float comboTimer;
+    [SerializeField] float comboReset = 1;
     int combo;
     GameCanvas canvas;
 
@@ -68,7 +69,7 @@ public class HumanReceivePoint : MonoBehaviour
             
             humansEaten++;
             combo++;
-            comboTimer = 1;
+            comboTimer = comboReset;
           
             es.UpdateCanvas();
             es.amountOfHumans--;
@@ -87,10 +88,11 @@ public class HumanReceivePoint : MonoBehaviour
             if(combo != 0)
             {
                 scoreForEatingHuman *= combo;
-                print(scoreForEatingHuman);
+              
+                
             }
-           
-            CalculateScore();
+           CalculateScore();
+            
            
             DisplayScore();
             // when player dies pass this through to submitscore
@@ -113,14 +115,17 @@ public class HumanReceivePoint : MonoBehaviour
     }
     private int CalculateScore()
     {
-        inGameScore += scoreForEatingHuman;
-        var distance =  Vector2.Distance(this.transform.position,ground.transform.position);
-       int yDistance = (-Mathf.RoundToInt(Mathf.Abs(transform.position.y - ground.transform.position.y)) *2);
-        inGameScore -= yDistance;
-       
+     //  inGameScore = 0;
+      inGameScore += scoreForEatingHuman;
+     var distance =  Vector2.Distance(this.transform.position,ground.transform.position);
+    int yDistance = (-Mathf.RoundToInt(Mathf.Abs(transform.position.y - ground.transform.position.y)) *2);
+
+
+      inGameScore -= yDistance;
+        canvas.scoreAddition.text = $"+ {scoreForEatingHuman - yDistance}";
         return inGameScore;
 
-    }
+   }
 
     public void SubmitScore()
     {

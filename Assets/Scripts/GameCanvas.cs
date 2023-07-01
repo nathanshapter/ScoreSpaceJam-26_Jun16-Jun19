@@ -18,12 +18,13 @@ public class GameCanvas : MonoBehaviour
   [SerializeField]  EnemySpawner es;
     PlayerController playerController;
    
-   public TextMeshProUGUI humanAmountText, copAmountText, comboText;
+   public TextMeshProUGUI humanAmountText, copAmountText, comboText, scoreAddition;
     private void Start()
     {
         humanAmountText.text = "x 0";
         gameOverMenu.SetActive(false);
         playerController = FindObjectOfType<PlayerController>();
+        scoreAddition.text = string.Empty;
     }
     public void GameOver()
     {
