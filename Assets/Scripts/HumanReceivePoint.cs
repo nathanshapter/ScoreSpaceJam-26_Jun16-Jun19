@@ -24,7 +24,10 @@ public class HumanReceivePoint : MonoBehaviour
     [SerializeField] ParticleSystem blood;
 
    EnemySpawner es;
-   
+
+  [SerializeField]  float comboTimer;
+    int combo;
+
     private void Start()
     {
         es = FindObjectOfType<EnemySpawner>();
@@ -34,7 +37,18 @@ public class HumanReceivePoint : MonoBehaviour
      
 
     }
-   public void DisplayScore()
+
+    private void FixedUpdate()
+    {
+        comboTimer -= Time.deltaTime;
+        if (comboTimer <= 0 && combo >= 1)
+        {
+           
+            combo = 0;
+           
+        }
+    }
+    public void DisplayScore()
     {
         scoreText.text = $"Score: {inGameScore}";
     }
@@ -47,6 +61,8 @@ public class HumanReceivePoint : MonoBehaviour
             AudioManager.instance.PlaySound(eat, false);
             
             humansEaten++;
+            combo++;
+            comboTimer = 1;
           
             es.UpdateCanvas();
             es.amountOfHumans--;
@@ -55,14 +71,19 @@ public class HumanReceivePoint : MonoBehaviour
            
             if(collision.GetComponent<Human>().isPoliceman)
             {
-                scoreForEatingHuman = 25;
+                scoreForEatingHuman = 10;
                 
             }
             else
             {
                 scoreForEatingHuman = 5;
             }
-
+            if(combo != 0)
+            {
+                scoreForEatingHuman *= combo;
+                print(scoreForEatingHuman);
+            }
+           
             CalculateScore();
            
             DisplayScore();

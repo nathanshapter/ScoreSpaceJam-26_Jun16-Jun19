@@ -43,8 +43,8 @@ public class EnemySpawner : MonoBehaviour
     public void UpdateCanvas()
     {
         amountOfHumans = FindObjectsOfType<Human>().Length;
-       
 
+        gunsCheck = FindObjectsOfType<PoliceGun>();
         canvas.humanAmountText.text = $"x {amountOfHumans}";
         canvas.copAmountText.text = $"x {gunsCheck.Length}";
     }
@@ -110,8 +110,8 @@ public class EnemySpawner : MonoBehaviour
    
         StartCoroutine(SpawnHuman());
 
-        gunsCheck = FindObjectsOfType<PoliceGun>();
-        if(gunsCheck.Length <= 5 && amountOfHumans >= 15 && coroutineRunning == false)
+       
+        if(amountOfHumans >= 15 && coroutineRunning == false)
         {
           
             StartCoroutine(SpawnPoliceMen());
@@ -119,7 +119,10 @@ public class EnemySpawner : MonoBehaviour
     }
   public  float CalculateNewPoliceSpawnTime()
     {
-       
+       if(timeBetweenPoliceSpawn <= 1)
+        {
+            return timeBetweenPoliceSpawn;
+        }
         float newSpawnTime = timeBetweenPoliceSpawn / 2;
         timeBetweenPoliceSpawn= newSpawnTime;
         return timeBetweenPoliceSpawn;
