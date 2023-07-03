@@ -41,6 +41,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void ResetHealth()
     {
+        startingHealth = 500;
         health = startingHealth;
         input.enabled = true;
         dead = false;
