@@ -23,7 +23,7 @@ public class UpgradeMenu : MonoBehaviour
     [SerializeField] TextMeshProUGUI[] text;
     private void Start()
     {
-      //  SwitchMenu(false);
+       SwitchMenu(false);
         hrs = FindObjectOfType<HumanReceivePoint>();
         player = FindObjectOfType<PlayerHealth>();
         beam= player.GetComponentInChildren<Beam>();
@@ -35,7 +35,7 @@ public class UpgradeMenu : MonoBehaviour
 
     }
 
-   
+
     private int GetUniqueRandomValue(HashSet<int> usedValues)
     {
         int randomValue;
@@ -43,68 +43,64 @@ public class UpgradeMenu : MonoBehaviour
         {
             randomValue = Random.Range(0, 6);
 
-        }
-        while (usedValues.Contains(randomValue));
+        } while (usedValues.Contains(randomValue));
         return randomValue;
     }
+
     public void SwitchMenu(bool on)
     {
-
         int textNumber = 0;
         foreach (var item in allUpgradeUI)
-            {
-                item.SetActive(on);
-            }       
-
-        if(on)
         {
-            
+            item.SetActive(on);
+        }
+
+        if (on)
+        {
             Time.timeScale = 0;
 
             HashSet<int> usedRandomValues = new HashSet<int>();
 
             foreach (Button btn in button)
             {
-                Button currentButton = btn; 
+                Button currentButton = btn;
 
-                int randomValue = GetUniqueRandomValue((HashSet<int>)usedRandomValues);
+                int randomValue = GetUniqueRandomValue(usedRandomValues);
+                usedRandomValues.Add(randomValue); // Add the random value to the used set
+
                 currentButton.onClick.RemoveAllListeners();
                 currentButton.onClick.AddListener(() => Upgrade(randomValue));
-             
-                
+
                 switch (randomValue)
                 {
                     case 0:
-                        text[textNumber].text = "Restore Health to Max";
+                        text[textNumber].text = "Restore Health";
                         break;
                     case 1:
-                        text[textNumber].text = "Upgrade Health Max";
+                        text[textNumber].text = "Upgrade Health";
                         break;
-                        case 2:
-                        text[textNumber].text = "Upgrade Beam Width";
+                    case 2:
+                        text[textNumber].text = "Upgrade Beam";
                         break;
                     case 3:
                         text[textNumber].text = "Kill all Police";
                         break;
-                        case 4:
+                    case 4:
                         text[textNumber].text = "Upgrade Speed";
                         break;
-                        case 5:
-                        text[textNumber].text = "5 seconds invis shield";
+                    case 5:
+                        text[textNumber].text = "Invincibility\n(5s)";
                         break;
                 }
-               
+
                 textNumber++;
             }
-            
-
         }
         else
         {
             Time.timeScale = 1;
         }
     }
-
     void RestoreHealth()
     {
         player.health = player.startingHealth;
@@ -139,7 +135,7 @@ public class UpgradeMenu : MonoBehaviour
                 SwitchMenu(false);
                 break;
             case 3:
-                // kill all police
+                FindObjectOfType<EnemySpawner>().DestroyAllGuns();
                 SwitchMenu(false);
                 break;
                 case 4:

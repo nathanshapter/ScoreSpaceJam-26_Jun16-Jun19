@@ -142,4 +142,11 @@ public class EnemySpawner : MonoBehaviour
         }
         else { return false; }
     }
+    public void DestroyAllGuns()
+    {
+        foreach(PoliceGun go in gunsCheck)
+        {
+            Destroy(go.gameObject);
+        }
+    }
 }
