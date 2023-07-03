@@ -32,7 +32,7 @@ public class HumanReceivePoint : MonoBehaviour
     GameCanvas canvas;
 
     UpgradeMenu upgradeMenu;
-
+    [SerializeField] int upgradeScoreNumber = 2500;
     private void Start()
     {
         canvas = FindObjectOfType<GameCanvas>();
@@ -59,14 +59,14 @@ public class HumanReceivePoint : MonoBehaviour
         }
     }
     int numberToUse = 0;
-    int amountOfUpgrades = 0;
+  
     public void DisplayScore()
     {
         scoreText.text = $"Score: {inGameScore}";
-        if (inGameScore >= 1000 && inGameScore / 1000 > numberToUse)
+        if (inGameScore >= upgradeScoreNumber && inGameScore / upgradeScoreNumber > numberToUse)
         {
-            numberToUse = inGameScore / 1000;
-            amountOfUpgrades++;
+            numberToUse = inGameScore / upgradeScoreNumber;
+           
             upgradeMenu.SwitchMenu(true);
         }
     }
@@ -98,6 +98,8 @@ public class HumanReceivePoint : MonoBehaviour
             }
             if(combo != 0)
             {
+                
+
                 scoreForEatingHuman *= combo;
               
                 
