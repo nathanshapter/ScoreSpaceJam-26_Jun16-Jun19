@@ -36,7 +36,17 @@ public class UpgradeMenu : MonoBehaviour
     }
 
    
+    private int GetUniqueRandomValue(HashSet<int> usedValues)
+    {
+        int randomValue;
+        do
+        {
+            randomValue = Random.Range(0, 6);
 
+        }
+        while (usedValues.Contains(randomValue));
+        return randomValue;
+    }
     public void SwitchMenu(bool on)
     {
 
@@ -50,15 +60,18 @@ public class UpgradeMenu : MonoBehaviour
         {
             
             Time.timeScale = 0;
+
+            HashSet<int> usedRandomValues = new HashSet<int>();
+
             foreach (Button btn in button)
             {
-                Button currentButton = btn; // Create a local reference to the button
+                Button currentButton = btn; 
 
-                int randomValue = Random.Range(0, 6); // Generate a random value from 0 to 5
-                currentButton.onClick.RemoveAllListeners(); // Remove previous listeners
+                int randomValue = GetUniqueRandomValue((HashSet<int>)usedRandomValues);
+                currentButton.onClick.RemoveAllListeners();
                 currentButton.onClick.AddListener(() => Upgrade(randomValue));
              
-
+                
                 switch (randomValue)
                 {
                     case 0:
