@@ -10,6 +10,7 @@ public class PlayerHealth : MonoBehaviour
    
 
     public int health;
+   public bool canTakedmg = true;
 
     public static PlayerHealth instance;
     public TextMeshProUGUI healthText;
@@ -34,6 +35,16 @@ public class PlayerHealth : MonoBehaviour
         health = startingHealth;
     }
 
+    public void Invincibility(float timer)
+    {
+        canTakedmg= false;
+        StartCoroutine(ResetInvincibility(timer));
+    }
+    private IEnumerator ResetInvincibility(float timer)
+    {
+        yield return new WaitForSeconds(timer);
+        canTakedmg= true;
+    }
     public void DisplayHealth()
     {
         healthText.text = $"Health: {health}";
@@ -48,7 +59,7 @@ public class PlayerHealth : MonoBehaviour
     }
     public void TakeDamage(int damage)
     {
-        if(!dead)
+        if(!dead && canTakedmg)
         {
             health -= damage;
             AudioManager.instance.PlaySound(damageSound, false);

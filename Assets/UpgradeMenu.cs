@@ -18,6 +18,9 @@ public class UpgradeMenu : MonoBehaviour
     [SerializeField] int healthUpgrade;
     [SerializeField] int healthIncrease = 250;
     [SerializeField] float beamSizeUpgrade = 1.1f;
+    [SerializeField] float beamSpeedUpgrade = 1.1f;
+    [SerializeField] float invincibilityTimer = 5;
+    private float invincibilityOriginal = 5;
 
   [SerializeField]  Button[] button;
     [SerializeField] TextMeshProUGUI[] text;
@@ -140,11 +143,12 @@ public class UpgradeMenu : MonoBehaviour
                 break;
                 case 4:
                 SwitchMenu(false);
-                // upgrade beam speed
+                FindObjectOfType<Beam>().UpgradeBeamSpeed(beamSpeedUpgrade);
                 break;
                 case 5:
                 SwitchMenu(false);
-                // give an invincibility shield for 5 seconds
+                invincibilityTimer = invincibilityOriginal;
+                FindObjectOfType<PlayerHealth>().Invincibility(invincibilityTimer);
                 break;
 
         }
