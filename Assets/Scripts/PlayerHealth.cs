@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class PlayerHealth : MonoBehaviour
    
 
     public int health;
+   
    public bool canTakedmg = true;
 
     public static PlayerHealth instance;
@@ -19,6 +21,7 @@ public class PlayerHealth : MonoBehaviour
    public bool dead = false;
 
     [SerializeField] AudioClip damageSound,gameOver;
+    [SerializeField] Image healthSlider;
     private void Awake()
     {
         if (instance == null)
@@ -33,6 +36,7 @@ public class PlayerHealth : MonoBehaviour
        ResetHealth();
         DisplayHealth();
         health = startingHealth;
+
     }
 
     public void Invincibility(float timer)
@@ -47,13 +51,18 @@ public class PlayerHealth : MonoBehaviour
     }
     public void DisplayHealth()
     {
-        healthText.text = $"Health: {health}";
+        
+
+        healthText.text = $"{health}/{startingHealth}";
+       
+        healthSlider.fillAmount = health/startingHealth;
     }
 
     public void ResetHealth()
     {
         startingHealth = 500;
         health = startingHealth;
+      
         input.enabled = true;
         dead = false;
     }
@@ -63,7 +72,7 @@ public class PlayerHealth : MonoBehaviour
         {
             health -= damage;
             AudioManager.instance.PlaySound(damageSound, false);
-            healthText.text = $"Health: {health}";
+            DisplayHealth();
             if (health <= 0 && !dead)
             {
                 dead = true;

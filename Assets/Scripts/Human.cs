@@ -46,7 +46,7 @@ public class Human : MonoBehaviour
             FlipCharacter();
         }
 
-       
+        moveSpeed = Random.Range(0.1f, .7f);
     }
 
  
@@ -93,6 +93,11 @@ public class Human : MonoBehaviour
         }
         Vector3 newPosition = Vector3.MoveTowards(transform.position, target.transform.position, beam.suckedMoveSpeed * Time.deltaTime);
         transform.position = newPosition;
+
+        if(!isBeingSucked)
+        {
+            canMove = true;
+        }
     }
 
     private void FlipCharacter()

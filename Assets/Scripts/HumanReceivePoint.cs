@@ -31,7 +31,7 @@ public class HumanReceivePoint : MonoBehaviour
     int combo;
     GameCanvas canvas;
 
-    UpgradeMenu upgradeMenu;
+   [SerializeField] UpgradeMenu upgradeMenu;
     [SerializeField] int upgradeScoreNumber = 2500;
     private void Start()
     {
@@ -41,7 +41,7 @@ public class HumanReceivePoint : MonoBehaviour
         boxCollider= GetComponent<BoxCollider2D>();
         DisplayScore();
      
-        upgradeMenu = FindObjectOfType<UpgradeMenu>();
+      
     }
 
     private void Update()
@@ -66,7 +66,7 @@ public class HumanReceivePoint : MonoBehaviour
         if (inGameScore >= upgradeScoreNumber && inGameScore / upgradeScoreNumber > numberToUse)
         {
             numberToUse = inGameScore / upgradeScoreNumber;
-           
+           upgradeMenu.gameObject.SetActive(true);
             upgradeMenu.SwitchMenu(true);
         }
     }
